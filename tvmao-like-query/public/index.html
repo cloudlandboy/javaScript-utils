@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剧情模糊查询</title>
+    <link rel="stylesheet" href="https://lib.baomitu.com/layui/2.6.5/css/layui.min.css">
+    <style>
+        .main {
+            width: 500px;
+            margin: auto;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <form class="layui-form" action="/tvmao" method="POST">
+            <div class="layui-form-item">
+                <label class="layui-form-label">剧情页地址</label>
+                <div class="layui-input-block">
+                    <input type="text" name="url" required lay-verify="required" placeholder="请输入剧情页地址"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">查询表达式</label>
+                <div class="layui-input-block">
+                    <input type="text" name="keyWord" required lay-verify="required" placeholder="请输入查询表达式"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="*">开始查询</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://lib.baomitu.com/layui/2.6.5/layui.min.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer;
+            var form = layui.form;
+            form.on('submit(*)', function (data) {
+                layer.load(2, { shade: 0.5, title: '查询中请稍后...' });
+            });
+        });
+
+    </script>
+</body>
+
+</html>
