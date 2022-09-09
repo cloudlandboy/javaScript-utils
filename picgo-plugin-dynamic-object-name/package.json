@@ -1,6 +1,6 @@
 {
   "name": "picgo-plugin-dynamic-object-name",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "picgo上传时根据路径匹配配置动态重命名对象名称",
   "main": "dist/index.js",
   "publishConfig": {
