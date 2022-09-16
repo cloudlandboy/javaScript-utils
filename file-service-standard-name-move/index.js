@@ -1,8 +1,8 @@
 /*
  * @Author: clboy
  * @Date: 2022-09-11 12:51:10
- * @LastEditors: clboy
- * @LastEditTime: 2022-09-11 20:03:27
+ * @LastEditors: sunyunla
+ * @LastEditTime: 2022-09-16 10:03:56
  * @Description: 笔记oss文件名称时间戳规范化目录迁移
  * 
  * Copyright (c) 2022 by clboy syl@clboy.cn, All Rights Reserved. 
@@ -17,14 +17,15 @@ const targetPrefix = "images/2021";
 const matchContentFileExt = [".js", ".html", ".md", ".txt"];
 const domain = "https://cdn.tencentfs.clboy.cn";
 
-assertIsDirectory(replaceContentDir);
+if (replaceContentDir) {
+    assertIsDirectory(replaceContentDir);
+}
 assertIsDirectory(bucketDir);
 
 
 async function nameSupplier() {
     await sleep(5);
     let date = new Date();
-    date.setFullYear(2021);
     return padStartZero(date.getFullYear())
         + padStartZero(date.getMonth() + 1)
         + padStartZero(date.getDate())
@@ -48,10 +49,12 @@ async function handle(dirPath) {
             record[filePath] = newPath;
             fs.writeFileSync('record.json', JSON.stringify(record, null, 4));
             fs.renameSync(filePath, newPath);
-            //文件内容替换
-            replaceContentDirHandle(replaceContentDir,
-                domain + filePath.substring(bucketDir.length),
-                domain + newPath.substring(bucketDir.length));
+            if (replaceContentDir) {
+                //文件内容替换
+                replaceContentDirHandle(replaceContentDir,
+                    domain + filePath.substring(bucketDir.length),
+                    domain + newPath.substring(bucketDir.length));
+            }
         } else if (dirent.isDirectory() && filterDir.indexOf(filePath) < 0) {
             handle(filePath);
         }
