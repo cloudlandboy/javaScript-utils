@@ -1,9 +1,9 @@
 /*
  * @Author: clboy
  * @Date: 2022-09-22 16:45:56
- * @LastEditors: sunyunla
- * @LastEditTime: 2022-09-22 20:04:42
- * @Description: 
+ * @LastEditors: clboy
+ * @LastEditTime: 2022-09-22 20:51:17
+ * @Description: 将指定目录的图片文件压缩后保存到另一个目录，保持目录结构
  * 
  * Copyright (c) 2022 by clboy syl@clboy.cn, All Rights Reserved. 
  */
@@ -35,7 +35,7 @@ const DESTINATION_DIR = argv[3];
     const dirContent = fs.readdirSync(dir, { withFileTypes: true });
     for (let dirent of dirContent) {
         if (dirent.isDirectory()) {
-            handle(path.join(dir, dirent.name));
+            await handle(path.join(dir, dirent.name));
         }
     }
 })(SOURCE_DIR);

@@ -1,7 +1,7 @@
 {
   "name": "directory-image-compress",
   "version": "1.0.0",
-  "description": "",
+  "description": "将指定目录的图片文件压缩后保存到另一个目录，保持目录结构",
   "main": "index.js",
   "type": "module",
   "keywords": [],
