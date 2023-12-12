@@ -100,10 +100,22 @@ class CompressBeforeUploadPlugin extends DynamicObjectNamePlugin {
 
 }
 
+class DecodeImgUrlAfterUploadPlugins implements IPlugin {
+
+  handle(ctx: IPicGo) {
+    ctx.output.forEach(item => {
+      item.imgUrl = decodeURIComponent(item.imgUrl);
+    })
+  }
+
+}
+
 export = (ctx: PicGo) => {
   return {
     register: () => {
-      ctx.helper.beforeUploadPlugins.register(pluginName.substring(13), new RenameBeforeUploadPlugin())
+      const noPreixName = pluginName.substring(13);
+      ctx.helper.beforeUploadPlugins.register(noPreixName, new RenameBeforeUploadPlugin())
+      ctx.helper.afterUploadPlugins.register(noPreixName, new DecodeImgUrlAfterUploadPlugins())
     }
   }
 }
