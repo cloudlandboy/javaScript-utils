@@ -1,11 +1,8 @@
-/*
- * @Author: clboy
- * @Date: 2022-08-28 21:50:58
- * @LastEditors: clboy
- * @LastEditTime: 2022-08-28 22:50:56
- * @Description: 
- * 
- * Copyright (c) 2022 by clboy syl@clboy.cn, All Rights Reserved. 
+/**
+ * 变量解析
+ * @author: clboy
+ * @date: 2023-12-11 16:54:46
+ * @Copyright (c) 2023 by syl@clboy.cn, All Rights Reserved. 
  */
 import { padStartZero } from "./utils"
 import childProcess from "child_process"
@@ -18,7 +15,7 @@ export interface IVariableParser {
 }
 
 /**
- * @description: 变量解析器，${变量}，支持变量列表：
+ * 变量解析器，${变量}，支持变量列表：
  * YEAR：当前年
  * MONTH：当前月
  * DATE：当前日期
@@ -54,7 +51,7 @@ export default class VariableParser implements IVariableParser {
     return !!VariableParser.variableMapping[variable];
   }
 
-  private static variableMapping = {
+  private static variableMapping: Record<string, (vm: VariableParser) => any> = {
     YEAR(vm: VariableParser) {
       return padStartZero(vm.date.getFullYear());
     },
